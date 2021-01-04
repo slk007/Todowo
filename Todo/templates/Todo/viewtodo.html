@@ -1,0 +1,36 @@
+{% extends 'Todo/base.html' %}
+
+{% block content %}
+
+    <div>
+        <h1>View Todo</h1>
+
+        <div>
+            <h2>{{ error }}</h2>
+
+            {{ todo.title }}
+            
+            <!-- update form -->
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Update</button>
+            </form>
+
+            <!-- completion form with only complete button-->
+            <form action="{% url 'completetodo' todo.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Completed</button>
+            </form>
+
+            <!-- deletion form with only delete button-->
+            <form action="{% url 'deletetodo' todo.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+
+
+        </div>
+    </div>
+
+{% endblock %}

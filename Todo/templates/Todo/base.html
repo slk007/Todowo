@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todowo App</title>
+</head>
+<body>
+
+    <div>
+        <a href="{% url 'home' %}">Home</a>
+        
+        {% if user.is_authenticated %}
+            <a href="{% url 'createtodo' %}">Create</a>
+            <a href="{% url 'currenttodos' %}">Current</a>
+            <a href="{% url 'completedtodos' %}">Completed</a>
+            
+            <p>Logged in as {{ user.username }}</p>
+            <form action="{% url 'logoutuser' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        {% else %}
+            <a href="{% url 'loginuser' %}">LogIn</a>
+            <a href="{% url 'signupuser' %}">SignUp</a>
+        {% endif %}
+    </div>
+
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>
