@@ -3,17 +3,30 @@
 {% block content %}
 
     <div>
-        <h1>Completed Todos</h1>
-
+        <h1> My Completed Todos</h1>
+    
         <div>
-            <ul>
-                {% for todo in todos %}
-                    <li>{{ todo.title }} - {{ todo.memo }}</li>
-                    {% if todo.important %}Imp{% endif %}
-                    Completed on {{ todo.datecompleted|date:'M j Y H:i' }}
-                {% endfor %}
-            </ul>
+            {% if not todos %}
+                <div class="jumbotron"><p>No Todos here yet !!!!!</p></div>
+            {% endif %}
+
+            {% for todo in todos %}
+            {% if todo.important %}
+                <div class="alert alert-danger" role="alert">
+                    <span class="badge badge-secondary">Imp</span>
+            {% else %}
+                <div class="alert alert-success" role="alert">
+                    {% endif %}
+                    {{ todo.title }}
+                    {% if todo.memo %}
+                        - {{ todo.memo }}
+                    {% endif %}
+                    , Completed on {{ todo.datecompleted|date:'M j Y H:i' }}
+                </div>
+            {% endfor %}
         </div>
     </div>
+
+    <a class="btn btn-primary" href="{% url 'createtodo' %}" role="button">Create New</a>
 
 {% endblock %}

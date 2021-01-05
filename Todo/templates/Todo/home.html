@@ -3,7 +3,14 @@
 {% block content %}
 
     <div>
-        <h1>Home</h1>
+        <div class="jumbotron">
+            <h1 class="display-4">Home</h1>
+            <p class="lead">Welcome to your own Todo App.</p>
+            <p>Create, track and complete your tasks in a easy way...</p>
+            <p class="lead">
+              <a class="btn btn-primary btn-lg" href="{% url 'createtodo' %}" role="button">Start</a>
+            </p>
+          </div>
     </div>
 
 {% endblock %}

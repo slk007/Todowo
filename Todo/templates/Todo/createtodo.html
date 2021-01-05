@@ -2,14 +2,23 @@
 
 {% block content %}
 
-    <h1>Create Todos</h1>
-    <h2>{{ error }}</h2>
-    <div>
-        <form action="" method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Create</button>
-        </form>
+<h1>Create New Todo</h1>
+
+{% if error %}
+<div class="alert alert-danger" role="alert">
+    {{ error }}
+</div>
+{% endif %}
+
+
+<form action="" method="POST">
+    <div class="form-group">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success" type="submit">Create</button>
     </div>
+</form>
+
+<a href="{% url 'currenttodos' %}" class="btn btn-danger">Back</a>
 
 {% endblock %}

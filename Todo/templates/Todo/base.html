@@ -1,35 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todowo App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+
+  <title>Todowo App</title>
+
 </head>
+
 <body>
 
-    <div>
-        <a href="{% url 'home' %}">Home</a>
-        
-        {% if user.is_authenticated %}
-            <a href="{% url 'createtodo' %}">Create</a>
-            <a href="{% url 'currenttodos' %}">Current</a>
-            <a href="{% url 'completedtodos' %}">Completed</a>
-            
-            <p>Logged in as {{ user.username }}</p>
-            <form action="{% url 'logoutuser' %}" method="POST">
-                {% csrf_token %}
-                <button type="submit">Logout</button>
-            </form>
-        {% else %}
-            <a href="{% url 'loginuser' %}">LogIn</a>
-            <a href="{% url 'signupuser' %}">SignUp</a>
-        {% endif %}
-    </div>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{% url 'home' %}">Todo</a>
+      </div>
 
-    <div>
-        {% block content %}
-        {% endblock %}
-    </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="{% url 'createtodo' %}">Create</a></li>
+
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'currenttodos' %}">Current</a></li>
+          <li><a href="{% url 'completedtodos' %}">Completed</a></li>
+          {% endif %}
+
+        </ul>
+        <div class="nav navbar-nav navbar-right">
+          {% if not user.is_authenticated %}
+          <a href="{% url 'loginuser' %}" class="btn btn-success">Log In</a>
+          <a href="{% url 'signupuser' %}" class="btn btn-primary">Sign Up</a>
+          {% endif %}
+        </div>
+        {% if user.is_authenticated %}
+
+        <form action="{% url 'logoutuser' %}" method="POST" class="navbar-form navbar-right">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Log Out</button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <p class="navbar-text"> user: {{ user.username }}</p>
+          </li>
+        </ul>
+        {% endif %}
+
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+
+
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+  </div>
 
 </body>
+
 </html>

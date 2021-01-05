@@ -5,28 +5,34 @@
     <div>
         <h1>View Todo</h1>
 
-        <div>
-            <h2>{{ error }}</h2>
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
 
-            {{ todo.title }}
+        <div>
             
             <!-- update form -->
             <form action="" method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit">Update</button>
+                <button type="submit" class="btn btn-success">Update</button>
             </form>
 
+        </div>
+        <br>
+        <div class="">
             <!-- completion form with only complete button-->
             <form action="{% url 'completetodo' todo.id %}" method="POST">
                 {% csrf_token %}
-                <button type="submit">Completed</button>
+                <button type="submit" class="btn btn-primary">Mark Completed</button>
             </form>
 
             <!-- deletion form with only delete button-->
             <form action="{% url 'deletetodo' todo.id %}" method="POST">
                 {% csrf_token %}
-                <button type="submit">Delete</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
             </form>
 
 
