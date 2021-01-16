@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Todo',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -85,7 +86,7 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.config(default='postgres://srblpwvmxzsght:594699ba7a8db9a30faf1df753604d719614e7137d55eabfa1018bb779b0ad2a@ec2-18-211-86-133.compute-1.amazonaws.com:5432/denq9eu38qkv9o')
+DATABASES['default'] = dj_database_url.config(default=config('DATABASE_URL'))
 
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
