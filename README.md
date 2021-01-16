@@ -9,8 +9,8 @@
     * Django REST Framework
 
 
-![Snapshot](https://github.com/slk007/Todowo/blob/master/images/todowo_snapshot.png)
+![Snapshot](https://github.com/slk007/Todowo/blob/main/images/todowo_snapshot.png)
 
 API(DRF):
-![Snapshot](https://github.com/slk007/Todowo/blob/master/images/todowo_api_snapshot.png)
+![Snapshot](https://github.com/slk007/Todowo/blob/main/images/todowo_api_snapshot.png)
 
